@@ -7,10 +7,10 @@
   --charcoal: #243034;
   --muted: #5e6b6a;
   --line: rgba(21, 27, 29, 0.22);
-  --accent: #476c78;
-  --accent-deep: #264c58;
-  --clay: #9a6848;
-  --field: #596b43;
+  --accent: #0a66c2;
+  --accent-deep: #004182;
+  --clay: #8dc63f;
+  --field: #00843d;
   --shadow: rgba(27, 31, 28, 0.26);
   --mono: "IBM Plex Mono", "Space Mono", "Courier New", monospace;
   --serif: "Iowan Old Style", "Cochin", "Georgia", serif;
@@ -28,7 +28,8 @@ body {
   margin: 0;
   background:
     radial-gradient(circle at 16% 8%, rgba(230, 240, 238, 0.74), transparent 18rem),
-    radial-gradient(circle at 80% 14%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 24rem),
+    radial-gradient(circle at 80% 14%, color-mix(in srgb, var(--accent) 32%, transparent), transparent 24rem),
+    radial-gradient(circle at 92% 72%, color-mix(in srgb, var(--clay) 30%, transparent), transparent 26rem),
     linear-gradient(115deg, #7d8b8b 0%, #d6ddda 42%, #a9b2aa 100%);
   color: var(--ink);
   font-family: var(--mono);
@@ -63,28 +64,38 @@ body::after {
 }
 
 .page-water {
-  --accent: #315f70;
-  --accent-deep: #173b49;
-  --clay: #686f5a;
+  --accent: #0a66c2;
+  --accent-deep: #004182;
+  --clay: #35b7ff;
+  --field: #0b7fab;
 }
 
-.page-environmental,
 .page-home {
-  --accent: #4f6b49;
-  --accent-deep: #263d28;
-  --clay: #7a6245;
+  --accent: #0a66c2;
+  --accent-deep: #004182;
+  --clay: #8dc63f;
+  --field: #00843d;
+}
+
+.page-environmental {
+  --accent: #8dc63f;
+  --accent-deep: #00843d;
+  --clay: #00a859;
+  --field: #5aa832;
 }
 
 .page-geotech {
-  --accent: #835a3e;
-  --accent-deep: #3f2f28;
-  --clay: #9a6848;
+  --accent: #f59e0b;
+  --accent-deep: #8a4b10;
+  --clay: #e4572e;
+  --field: #7a6245;
 }
 
 .page-research {
-  --accent: #3f5968;
-  --accent-deep: #1d303b;
-  --clay: #5f6656;
+  --accent: #00a6a6;
+  --accent-deep: #064e5d;
+  --clay: #6d5dfb;
+  --field: #2a6f97;
 }
 
 a {
@@ -294,9 +305,51 @@ h3 {
   left: clamp(1.2rem, 3vw, 2.4rem);
   top: clamp(1.2rem, 3vw, 2.4rem);
   z-index: 1;
-  color: rgba(76, 83, 55, 0.22);
+  color: color-mix(in srgb, var(--accent) 28%, transparent);
   font-size: clamp(5rem, 14vw, 12rem);
   line-height: 0.78;
+}
+
+.profile-card {
+  display: grid;
+  grid-template-columns: 5.3rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  max-width: 520px;
+  margin: -0.6rem 0 1.5rem;
+  padding: 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+  background:
+    linear-gradient(135deg, rgba(245, 247, 242, 0.72), color-mix(in srgb, var(--accent) 13%, transparent)),
+    rgba(245, 247, 242, 0.52);
+  box-shadow: 0 18px 46px rgba(21, 27, 29, 0.16);
+  backdrop-filter: blur(14px) saturate(120%);
+}
+
+.profile-card img {
+  width: 5.3rem;
+  aspect-ratio: 1;
+  border: 3px solid color-mix(in srgb, var(--accent) 76%, var(--cream));
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 22%;
+}
+
+.profile-card p {
+  margin: 0;
+  color: var(--charcoal);
+  font-size: 0.83rem;
+  line-height: 1.35;
+}
+
+.profile-card span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--accent-deep);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .home-art,
@@ -370,9 +423,9 @@ h3 {
   align-items: center;
   justify-content: center;
   min-height: 2.8rem;
-  border: 1px solid rgba(32, 25, 19, 0.72);
+  border: 1px solid color-mix(in srgb, var(--accent-deep) 62%, var(--ink));
   padding: 0.75rem 1.05rem;
-  background: rgba(255, 247, 232, 0.32);
+  background: color-mix(in srgb, var(--accent) 14%, var(--cream));
   color: var(--ink);
   font-size: 0.76rem;
   letter-spacing: 0.12em;
@@ -382,9 +435,9 @@ h3 {
 
 .button:hover,
 .text-link:hover {
-  background: var(--ink);
+  background: var(--accent-deep);
   color: var(--cream);
-  box-shadow: 0 14px 34px rgba(32, 25, 19, 0.24);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--accent) 32%, rgba(32, 25, 19, 0.24));
   transform: translateY(-2px);
 }
 
@@ -433,6 +486,8 @@ h3 {
 }
 
 .path-card {
+  --card-accent: var(--accent);
+  --card-deep: var(--accent-deep);
   position: relative;
   display: grid;
   align-content: end;
@@ -466,7 +521,9 @@ h3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(21, 17, 13, 0.82), rgba(21, 17, 13, 0.06));
+  background:
+    linear-gradient(to top, color-mix(in srgb, var(--card-deep) 86%, #071114), rgba(21, 17, 13, 0.06)),
+    linear-gradient(135deg, color-mix(in srgb, var(--card-accent) 46%, transparent), transparent 54%);
 }
 
 .path-card span,
@@ -474,6 +531,26 @@ h3 {
 .path-card em {
   position: relative;
   z-index: 1;
+}
+
+.path-water {
+  --card-accent: #0a66c2;
+  --card-deep: #004182;
+}
+
+.path-waste {
+  --card-accent: #8dc63f;
+  --card-deep: #00843d;
+}
+
+.path-geotech {
+  --card-accent: #f59e0b;
+  --card-deep: #8a4b10;
+}
+
+.path-research {
+  --card-accent: #00a6a6;
+  --card-deep: #064e5d;
 }
 
 .path-card span,
@@ -766,6 +843,14 @@ h3 {
   .site-footer,
   .site-nav {
     width: min(100% - 1rem, 1220px);
+  }
+
+  .profile-card {
+    grid-template-columns: 4.4rem minmax(0, 1fr);
+  }
+
+  .profile-card img {
+    width: 4.4rem;
   }
 
   .home-art,
