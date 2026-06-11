@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Landfill cover soil and gas attenuation cross-section</title>
+  <desc id="desc">Layered landfill cover cross-section with soil strata, moisture paths, methane migration, and oxidation zone.</desc>
+  <rect width="900" height="620" fill="#deceb4"/>
+  <path d="M70 222 C214 160 350 250 504 202 S710 152 835 196 V520 H70Z" fill="#6f7651" opacity=".45"/>
+  <path d="M70 304 C218 246 354 326 508 286 S712 235 835 270 V520 H70Z" fill="#a86f4d" opacity=".5"/>
+  <path d="M70 392 C220 350 374 410 530 374 S720 330 835 360 V520 H70Z" fill="#4b392c" opacity=".58"/>
+  <path d="M70 478 H835 V520 H70Z" fill="#201913" opacity=".75"/>
+  <g fill="none" stroke="#466f7a" stroke-width="5" stroke-linecap="round">
+    <path d="M190 165 C182 235 235 264 220 335"/>
+    <path d="M420 190 C380 250 438 296 408 370"/>
+    <path d="M660 158 C642 234 700 278 670 360"/>
+  </g>
+  <g fill="none" stroke="#f2e6d2" stroke-width="4" stroke-dasharray="8 12">
+    <path d="M292 450 C300 390 352 372 362 318"/>
+    <path d="M560 454 C570 392 630 370 640 310"/>
+  </g>
+  <g font-family="Courier New, monospace" fill="#201913">
+    <text x="54" y="76" font-size="24" letter-spacing="5">COVER SOIL + GAS ATTENUATION</text>
+    <text x="54" y="108" font-size="13" letter-spacing="3">MOISTURE MOVEMENT / DRAINAGE / METHANE OXIDATION</text>
+    <text x="640" y="245" font-size="14" letter-spacing="3">OXIDATION ZONE</text>
+  </g>
+</svg>

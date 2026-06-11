@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">GIS-supported geotechnical site analysis map</title>
+  <desc id="desc">A technical site map with contour lines, borehole points, pavement zones, and drainage context.</desc>
+  <rect width="900" height="620" fill="#d8c7aa"/>
+  <g fill="none" stroke="#6f7651" stroke-opacity=".6" stroke-width="3">
+    <path d="M40 482 C170 410 260 500 385 430 S640 322 850 380"/>
+    <path d="M40 424 C165 350 285 430 410 372 S650 270 850 318"/>
+    <path d="M40 366 C180 292 300 368 438 318 S650 220 850 268"/>
+    <path d="M40 306 C190 235 330 310 468 260 S670 178 850 214"/>
+  </g>
+  <path d="M150 180 H720 V410 H150Z" fill="#f0e2c9" stroke="#201913" stroke-width="5"/>
+  <path d="M215 230 H648 V356 H215Z" fill="#a86f4d" opacity=".38" stroke="#201913" stroke-width="3"/>
+  <path d="M170 440 L760 150" stroke="#466f7a" stroke-width="12" stroke-linecap="round"/>
+  <g fill="#201913">
+    <circle cx="252" cy="242" r="12"/>
+    <circle cx="395" cy="286" r="12"/>
+    <circle cx="548" cy="254" r="12"/>
+    <circle cx="602" cy="336" r="12"/>
+  </g>
+  <g font-family="Courier New, monospace" fill="#201913">
+    <text x="54" y="76" font-size="24" letter-spacing="5">GIS-SUPPORTED SITE ANALYSIS</text>
+    <text x="54" y="108" font-size="13" letter-spacing="3">CONTOURS / BORINGS / PAVEMENT ZONES / DRAINAGE CONTEXT</text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Geotechnical materials testing plate</title>
+  <desc id="desc">A lab and field materials plate with sieve stack, Proctor curve, CBR gauge, and soil classification layers.</desc>
+  <rect width="900" height="620" fill="#d7c2a0"/>
+  <g fill="#e9dcc5" stroke="#201913" stroke-width="4">
+    <ellipse cx="190" cy="225" rx="88" ry="28"/>
+    <rect x="102" y="225" width="176" height="44"/>
+    <ellipse cx="190" cy="269" rx="88" ry="28"/>
+    <rect x="102" y="269" width="176" height="44"/>
+    <ellipse cx="190" cy="313" rx="88" ry="28"/>
+    <rect x="102" y="313" width="176" height="44"/>
+    <ellipse cx="190" cy="357" rx="88" ry="28"/>
+  </g>
+  <path d="M380 430 C430 250 520 250 570 430" fill="none" stroke="#466f7a" stroke-width="8"/>
+  <path d="M380 430 H600" stroke="#201913" stroke-width="4"/>
+  <path d="M382 430 V220" stroke="#201913" stroke-width="4"/>
+  <circle cx="710" cy="312" r="84" fill="#e9dcc5" stroke="#201913" stroke-width="5"/>
+  <path d="M710 312 L764 262" stroke="#a86f4d" stroke-width="7" stroke-linecap="round"/>
+  <rect x="655" y="420" width="120" height="48" fill="#201913"/>
+  <g font-family="Courier New, monospace" fill="#201913">
+    <text x="54" y="76" font-size="24" letter-spacing="5">SOILS + MATERIALS TESTING</text>
+    <text x="54" y="108" font-size="13" letter-spacing="3">SIEVE / ATTERBERG / PROCTOR / CBR / FIELD DENSITY</text>
+    <text x="380" y="472" font-size="14" letter-spacing="3">COMPACTION CURVE</text>
+  </g>
+</svg>
