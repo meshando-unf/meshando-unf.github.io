@@ -30,7 +30,7 @@ html {
 
 body {
   margin: 0;
-  background: #000;
+  background: #030303;
   color: var(--white);
   font-family: var(--font);
   line-height: 1.5;
@@ -65,10 +65,10 @@ body::after {
 
 .topo-field {
   z-index: 0;
-  opacity: 0.32;
+  opacity: 0.38;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.2), #000 74%),
-    url("data:image/svg+xml,%3Csvg width='1800' height='900' viewBox='0 0 1800 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.055' stroke-width='4'%3E%3Cpath d='M-120 620C260 430 560 470 850 650c315 195 650 202 1050-120'/%3E%3Cpath d='M-180 760C225 540 560 590 875 778c330 198 690 190 1105-160'/%3E%3Cpath d='M-220 900C200 660 560 720 910 900c340 175 710 135 1090-210'/%3E%3C/g%3E%3C/svg%3E");
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.72) 78%),
+    url("data:image/svg+xml,%3Csvg width='1800' height='900' viewBox='0 0 1800 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='4'%3E%3Cpath d='M-120 620C260 430 560 470 850 650c315 195 650 202 1050-120'/%3E%3Cpath d='M-180 760C225 540 560 590 875 778c330 198 690 190 1105-160'/%3E%3Cpath d='M-220 900C200 660 560 720 910 900c340 175 710 135 1090-210'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 50% calc(58% + var(--topo-shift, 0px));
   background-size: max(1200px, 100vw) auto;
@@ -78,7 +78,7 @@ body::after {
 
 .plot-grid {
   z-index: 0;
-  opacity: 0.018;
+  opacity: 0.032;
   background-image:
     linear-gradient(rgba(255,255,255,.18) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
@@ -103,8 +103,8 @@ body::after {
 .viewport-vignette {
   z-index: 3;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.56)),
-    radial-gradient(circle at center, transparent 52%, rgba(0, 0, 0, 0.72) 100%);
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.3)),
+    radial-gradient(circle at center, transparent 56%, rgba(0, 0, 0, 0.54) 100%);
 }
 
 .blueprint-field {
