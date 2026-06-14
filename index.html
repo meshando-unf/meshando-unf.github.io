@@ -4,11 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Minimal editorial portfolio for Meshach Ando, civil and environmental engineering.">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:title" content="Meshach Ando | Civil + Environmental Engineering">
+  <meta property="og:description" content="Water resources, environmental systems, geotechnical field work, and research by Meshach Ando.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://meshando-unf.github.io/">
+  <meta property="og:image" content="https://meshando-unf.github.io/assets/images/profile/linkedin_profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Meshach Ando | Civil + Environmental Engineering</title>
+  <link rel="canonical" href="https://meshando-unf.github.io/">
   <link rel="icon" href="assets/icons/site-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260614c">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="preload" as="image" href="assets/images/profile/linkedin_profile.jpg">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260614d">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Meshach Ando",
+      "url": "https://meshando-unf.github.io/",
+      "image": "https://meshando-unf.github.io/assets/images/profile/linkedin_profile.jpg",
+      "sameAs": [
+        "https://www.linkedin.com/in/meshachando",
+        "https://github.com/meshando-unf",
+        "https://orcid.org/0009-0002-5048-3672"
+      ],
+      "jobTitle": "Civil Engineering Graduate Student",
+      "knowsAbout": ["Water resources", "Environmental engineering", "Geotechnical engineering", "Landfill methane emissions", "GIS", "Engineering data analysis"]
+    }
+  </script>
 </head>
 <body class="page-home">
+  <div class="scroll-meter" aria-hidden="true"><span></span></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-nav" data-reveal>
@@ -20,16 +48,19 @@
           <a href="#expertise">Expertise</a>
           <a href="#gallery">Gallery</a>
           <a href="#news">News</a>
+          <a href="#resume-hub">Resume Hub</a>
+          <a href="#availability">Availability</a>
           <a href="assets/docs/Meshach_Ando_Full_CV.pdf">CV</a>
         </div>
       </details>
+      <button class="nav-command" type="button" data-command-open aria-haspopup="dialog">Jump</button>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main id="main">
     <section class="home-hero home-intro frame" data-reveal>
-      <img class="hero-profile" src="assets/images/profile/linkedin_profile.jpg" alt="Meshach Ando professional headshot">
+      <img class="hero-profile" src="assets/images/profile/linkedin_profile.jpg" alt="Meshach Ando professional headshot" width="352" height="352" decoding="async">
       <h1>Meshach Ando</h1>
       <p class="home-lines">I study civil engineering and spend most of my time turning messy field problems into models, maps, and clear engineering stories.</p>
       <span class="short-rule" aria-hidden="true"></span>
@@ -47,8 +78,15 @@
 
     <section id="about" class="about-panel" data-reveal>
       <p class="eyebrow">About Me</p>
-      <h2>I’m a civil engineering graduate student who likes work that sits between the field, the model, and the final decision.</h2>
+      <h2>I'm a civil engineering graduate student who likes work that sits between the field, the model, and the final decision.</h2>
       <p>I care about water, waste systems, geotechnical context, and the data work that makes engineering evidence easier to trust.</p>
+    </section>
+
+    <section class="proof-strip" data-reveal aria-label="Portfolio proof points">
+      <article><span>04</span><p>focused engineering lanes</p></article>
+      <article><span>2+</span><p>years of applied engineering experience</p></article>
+      <article><span>FE</span><p>Civil exam passed</p></article>
+      <article><span>2026</span><p>PE Water Resources + Environmental scheduled</p></article>
     </section>
 
     <section id="expertise" class="split-section" data-reveal>
@@ -58,30 +96,39 @@
       </div>
       <div class="path-grid">
         <a class="path-card path-water" href="water-resources/">
-          <img src="assets/images/realistic/water-hero.jpg" alt="">
+          <img src="assets/images/realistic/water-hero.jpg" alt="" loading="lazy" decoding="async">
           <span>01</span>
           <strong>Water Resources + H&amp;H</strong>
           <em>Stormwater, drainage, hydraulics, modeling, and GIS.</em>
         </a>
         <a class="path-card path-waste" href="environmental/">
-          <img src="assets/images/realistic/environmental-hero.jpg" alt="">
+          <img src="assets/images/realistic/environmental-hero.jpg" alt="" loading="lazy" decoding="async">
           <span>02</span>
           <strong>Environmental + Solid Waste</strong>
           <em>Landfills, methane, PFAS, GIS, and atmospheric modeling.</em>
         </a>
         <a class="path-card path-geotech" href="geotech/">
-          <img src="assets/images/realistic/geotech-hero.jpg" alt="">
+          <img src="assets/images/realistic/geotech-hero.jpg" alt="" loading="lazy" decoding="async">
           <span>03</span>
           <strong>Geotechnical + Civil Field</strong>
           <em>Materials, field work, QA/QC, and waste containment.</em>
         </a>
         <a class="path-card path-research" href="research/">
-          <img src="assets/images/realistic/research-hero.jpg" alt="">
+          <img src="assets/images/realistic/research-hero.jpg" alt="" loading="lazy" decoding="async">
           <span>04</span>
           <strong>Research</strong>
           <em>Methane emissions, FOD models, SEM, satellite data, and PFAS.</em>
         </a>
       </div>
+    </section>
+
+    <section class="feature-panel" data-reveal>
+      <div>
+        <p class="eyebrow">Featured</p>
+        <h2>Landfill systems keep showing up in my work because they connect water, soil, air, waste, and uncertainty in one place.</h2>
+      </div>
+      <p>The common thread is practical: trace the system, build a model, test the assumptions, and explain the result without hiding the messy parts.</p>
+      <a class="button" href="research/">View Research</a>
     </section>
 
     <section class="stack-panel stack-lab" data-reveal>
@@ -118,21 +165,34 @@
 
     <section class="gallery-grid" aria-label="Portfolio image gallery">
       <figure data-reveal>
-        <img src="assets/images/realistic/water-network.jpg" alt="Drainage plans and water infrastructure model review">
+        <img src="assets/images/realistic/water-network.jpg" alt="Drainage plans and water infrastructure model review" loading="lazy" decoding="async">
         <figcaption>Drainage networks</figcaption>
       </figure>
       <figure data-reveal>
-        <img src="assets/images/realistic/env-methane.jpg" alt="Methane monitoring and landfill model comparison workstation">
+        <img src="assets/images/realistic/env-methane.jpg" alt="Methane monitoring and landfill model comparison workstation" loading="lazy" decoding="async">
         <figcaption>Methane modeling</figcaption>
       </figure>
       <figure data-reveal>
-        <img src="assets/images/realistic/geo-materials.jpg" alt="Soil and pavement materials testing setup">
+        <img src="assets/images/realistic/geo-materials.jpg" alt="Soil and pavement materials testing setup" loading="lazy" decoding="async">
         <figcaption>Materials testing</figcaption>
       </figure>
       <figure data-reveal>
-        <img src="assets/images/realistic/research-hero.jpg" alt="Research desk with maps, plots, and environmental modeling notes">
+        <img src="assets/images/realistic/research-hero.jpg" alt="Research desk with maps, plots, and environmental modeling notes" loading="lazy" decoding="async">
         <figcaption>Research workflow</figcaption>
       </figure>
+    </section>
+
+    <section id="resume-hub" class="split-section resume-hub" data-reveal>
+      <div>
+        <p class="eyebrow">Resume Hub</p>
+        <h2>Different conversations need different versions of the same story.</h2>
+      </div>
+      <div class="resume-list">
+        <a href="assets/docs/Meshach_Ando_Full_CV.pdf"><span>Full CV</span><em>Complete academic and engineering profile</em></a>
+        <a href="assets/docs/Meshach_Ando_Water_Resources_Resume.pdf"><span>Water Resources</span><em>Hydrology, drainage, water, and modeling</em></a>
+        <a href="assets/docs/Meshach_Ando_Environmental_Resume.pdf"><span>Environmental</span><em>Solid waste, methane, PFAS, and GIS</em></a>
+        <a href="assets/docs/Meshach_Ando_Geotech_Resume.pdf"><span>Geotech</span><em>Materials, QA/QC, field work, and cover systems</em></a>
+      </div>
     </section>
 
     <section id="news" class="split-section news-section" data-reveal>
@@ -159,6 +219,17 @@
       </div>
     </section>
 
+    <section id="availability" class="availability-panel" data-reveal>
+      <p class="eyebrow">Availability</p>
+      <h2>Open to engineering roles, research collaborations, and conversations that need both field judgment and data discipline.</h2>
+      <div class="availability-actions">
+        <button class="button" type="button" data-copy-email data-email="meshachando.apply@gmail.com">Copy Email</button>
+        <a class="button" href="mailto:meshachando.apply@gmail.com">Email Me</a>
+        <a class="button" href="https://www.linkedin.com/in/meshachando" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="copy-feedback" role="status" aria-live="polite"></p>
+    </section>
+
     <section id="contact" class="contact-panel contact-home frame" data-reveal>
       <p class="eyebrow">Contact</p>
       <div class="contact-grid contact-links">
@@ -175,6 +246,29 @@
     <span>&copy; <span id="year">2026</span></span>
   </footer>
 
-  <script src="assets/js/main.js?v=20260614c"></script>
+  <dialog class="command-dialog" aria-label="Quick navigation">
+    <form method="dialog">
+      <button class="command-close" value="close" aria-label="Close quick navigation">Close</button>
+    </form>
+    <p class="eyebrow">Jump</p>
+    <h2>Where do you want to go?</h2>
+    <div class="command-grid">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#news">News</a>
+      <a href="#resume-hub">Resume Hub</a>
+      <a href="#availability">Availability</a>
+      <a href="water-resources/">Water Resources</a>
+      <a href="environmental/">Environmental</a>
+      <a href="geotech/">Geotechnical</a>
+      <a href="research/">Research</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </dialog>
+
+  <a class="back-top" href="#main" aria-label="Back to top">Top</a>
+
+  <script src="assets/js/main.js?v=20260614d"></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+{
+  "name": "Meshach Ando Portfolio",
+  "short_name": "Meshach Ando",
+  "description": "Civil and environmental engineering portfolio for Meshach Ando.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/assets/icons/site-icon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
