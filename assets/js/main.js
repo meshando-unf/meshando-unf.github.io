@@ -90,10 +90,10 @@
 
       lastScrollDirection = dy > 0 ? "down" : dy < 0 ? "up" : "still";
       document.documentElement.style.setProperty("--scroll-skew", skew.toFixed(3));
+      document.documentElement.style.setProperty("--topo-shift", (window.scrollY * -0.035).toFixed(2) + "px");
       document.documentElement.classList.add("velocity-skew");
 
       if (now - lastScrollUiUpdate > 140) {
-        updateFavicon(lastScrollDirection);
         writeTerminal("> Scroll depth: " + Math.round(window.scrollY) + "px");
         lastScrollUiUpdate = now;
       }
@@ -103,7 +103,6 @@
         document.documentElement.style.setProperty("--scroll-skew", "0");
         document.documentElement.classList.remove("velocity-skew");
         lastScrollDirection = "still";
-        updateFavicon("still");
       }, 130);
 
       lastScrollY = window.scrollY;
@@ -114,15 +113,44 @@
   function setupScrollUi() {
     var backTop = document.querySelector(".back-top");
     var updateScrollUi = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      var progress = max > 0 ? window.scrollY / max : 0;
       if (backTop) {
         backTop.classList.toggle("is-visible", window.scrollY > 420);
       }
+      updateFavicon(progress);
     };
 
     updateScrollUi();
     updateFavicon("still");
     window.addEventListener("scroll", updateScrollUi, { passive: true });
     window.addEventListener("resize", updateScrollUi);
+  }
+
+  function setupEngineeringBackdrop() {
+    ["topo-field", "plot-grid", "viewport-vignette", "blueprint-field"].forEach(function (className) {
+      if (!document.querySelector("." + className)) {
+        var node = document.createElement("div");
+        node.className = className;
+        node.setAttribute("aria-hidden", "true");
+        document.body.appendChild(node);
+      }
+    });
+
+    var hour = new Date().getHours();
+    var light = Math.round(Math.max(0, Math.sin((hour / 24) * Math.PI)) * 10);
+    document.documentElement.style.setProperty("--time-light", String(light));
+
+    if (!prefersReducedMotion) {
+      window.setInterval(function () {
+        document.documentElement.style.setProperty("--grid-x", Math.round(Math.random() * 100) + "%");
+        document.documentElement.style.setProperty("--grid-y", Math.round(Math.random() * 100) + "%");
+        document.documentElement.style.setProperty("--grid-pulse", "0.75");
+        window.setTimeout(function () {
+          document.documentElement.style.setProperty("--grid-pulse", "0");
+        }, 180);
+      }, 2400);
+    }
   }
 
   function setupNavigation() {
@@ -195,6 +223,213 @@
     Object.keys(linkMap).forEach(function (id) {
       observer.observe(document.getElementById(id));
     });
+  }
+
+  function setupCommandPalette() {
+    if (document.querySelector(".command-palette")) {
+      return;
+    }
+    var palette = document.createElement("div");
+    var box = document.createElement("div");
+    var input = document.createElement("input");
+    var results = document.createElement("div");
+    var isRoot = location.pathname === "/" || location.pathname.endsWith("/index.html");
+    var home = isRoot ? "" : "../";
+    var records = [
+      ["About", home + "#about"],
+      ["Expertise", home + "#expertise"],
+      ["Gallery", home + "#gallery"],
+      ["Resume Hub", home + "#resume-hub"],
+      ["News", home + "#news"],
+      ["Contact", "#contact"],
+      ["Water Resources", location.pathname.includes("water-resources") ? "#work" : home + "water-resources/"],
+      ["Environmental", location.pathname.includes("environmental") ? "#work" : home + "environmental/"],
+      ["Geotechnical", location.pathname.includes("geotech") ? "#work" : home + "geotech/"],
+      ["Research", location.pathname.includes("research") ? "#areas" : home + "research/"],
+      ["PFAS", location.pathname.includes("research") ? "#areas" : home + "research/"],
+      ["Methane", location.pathname.includes("research") ? "#areas" : home + "research/"],
+      ["Full CV", home + "assets/docs/Meshach_Ando_Full_CV.pdf"]
+    ];
+
+    palette.className = "command-palette";
+    box.className = "command-box";
+    results.className = "command-results";
+    input.type = "search";
+    input.placeholder = "Type Resume, PFAS, Water, Contact...";
+    input.setAttribute("aria-label", "Search site");
+    box.appendChild(input);
+    box.appendChild(results);
+    palette.appendChild(box);
+    document.body.appendChild(palette);
+
+    function render(query) {
+      var q = (query || "").toLowerCase();
+      var filtered = records.filter(function (record) {
+        return record[0].toLowerCase().indexOf(q) !== -1 || record[1].toLowerCase().indexOf(q) !== -1;
+      }).slice(0, 8);
+      results.innerHTML = filtered.map(function (record) {
+        return '<a href="' + record[1] + '"><span>' + record[0] + '</span><span>' + record[1] + '</span></a>';
+      }).join("");
+    }
+
+    function openPalette() {
+      palette.classList.add("is-open");
+      render(input.value);
+      window.setTimeout(function () {
+        input.focus();
+        input.select();
+      }, 30);
+    }
+
+    function closePalette() {
+      palette.classList.remove("is-open");
+      input.value = "";
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openPalette();
+      } else if (event.key === "Escape") {
+        closePalette();
+      }
+    });
+
+    input.addEventListener("input", function () {
+      render(input.value);
+    });
+
+    results.addEventListener("click", function (event) {
+      if (event.target.closest("a")) {
+        closePalette();
+      }
+    });
+
+    palette.addEventListener("click", function (event) {
+      if (event.target === palette) {
+        closePalette();
+      }
+    });
+
+    render("");
+  }
+
+  function setupEngineeringTooltips() {
+    var terms = {
+      "AERMOD": "EPA air dispersion model used to estimate downwind pollutant concentrations.",
+      "HEC-RAS": "Hydraulic model for rivers, channels, bridges, culverts, and floodplain analysis.",
+      "LiDAR": "Laser-based surveying data used for high-resolution elevation and terrain models.",
+      "EPA SWMM": "Stormwater model for runoff, drainage networks, and urban hydrology.",
+      "Civil 3D": "Autodesk civil design software for grading, corridors, surfaces, and utilities.",
+      "ArcGIS Pro": "GIS software used for spatial analysis, mapping, and engineering decision support.",
+      "PFAS": "Persistent synthetic chemicals often assessed through environmental exposure screening.",
+      "SEM": "Surface emission monitoring used to detect landfill gas emissions at the cover surface.",
+      "FOD": "First-order decay model used to estimate landfill methane generation over time.",
+      "GHGRP": "EPA Greenhouse Gas Reporting Program emissions dataset.",
+      "IPCC": "International climate methodology often used for greenhouse gas inventories."
+    };
+    var selector = "p, li, .tools, .metrics, figcaption";
+    Array.prototype.slice.call(document.querySelectorAll(selector)).forEach(function (node) {
+      if (node.closest("a, button") || node.dataset.tooltipped) {
+        return;
+      }
+      var html = node.innerHTML;
+      Object.keys(terms).forEach(function (term) {
+        var escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        html = html.replace(new RegExp("\\b" + escaped + "\\b", "g"), '<span class="tech-term" tabindex="0" data-tip="' + terms[term] + '">' + term + "</span>");
+      });
+      node.innerHTML = html;
+      node.dataset.tooltipped = "true";
+    });
+  }
+
+  function setupStackCodeToggles() {
+    var snippets = {
+      "Hydraulic + Civil Systems": "storm = swmm.run(site)\nras.check(profile=storm.outfall)\ncapacity = storm.peak_flow / pipe.limit",
+      "Spatial Evidence": "flow_paths = gis.trace(dem)\nreceptors = gis.join(buffer, assets)\nmap.export('site_context')",
+      "Engineering Data": "df = clean(raw)\nqa = df.groupby('site').agg(['mean','max'])\nplot(qa)",
+      "Research Methods": "for model in fod_models:\n    residual = measured - model.predict(site)\n    rank(residual)",
+      "Flow Paths": "dem = arcgis.surface(site)\npaths = hydrology.flow_accumulation(dem)",
+      "Networks": "pipes = civil3d.network(layout)\ncheck = pipes.capacity(storm_event)",
+      "Hydraulics": "ras = hecras.plan('100yr')\nras.compute()\nreview(ras.water_surface)",
+      "Results": "fig = plot(model, observed)\nreport.add(fig, assumptions)"
+    };
+
+    Array.prototype.slice.call(document.querySelectorAll(".stack-node")).forEach(function (node) {
+      var heading = node.querySelector("h3");
+      var paragraph = node.querySelector("p");
+      if (!heading || !paragraph || node.querySelector(".code-toggle")) {
+        return;
+      }
+      var original = paragraph.textContent;
+      var code = snippets[heading.textContent.trim()] || "result = model(input)\ncheck(result)\nexport(summary)";
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-toggle";
+      button.textContent = "Code";
+      button.addEventListener("click", function () {
+        var existing = node.querySelector("pre");
+        if (existing) {
+          existing.remove();
+          paragraph.textContent = original;
+          button.textContent = "Code";
+          return;
+        }
+        paragraph.textContent = "Example workflow logic:";
+        var pre = document.createElement("pre");
+        pre.textContent = code;
+        node.appendChild(pre);
+        button.textContent = "Text";
+      });
+      node.appendChild(button);
+    });
+  }
+
+  function setupBlueprintHover() {
+    if (!finePointer) {
+      return;
+    }
+    Array.prototype.slice.call(document.querySelectorAll(".project-copy h3, .path-card strong")).forEach(function (node) {
+      node.addEventListener("pointerenter", function () {
+        document.documentElement.classList.add("blueprint-on");
+      });
+      node.addEventListener("pointermove", function (event) {
+        document.documentElement.style.setProperty("--blueprint-x", event.clientX + "px");
+        document.documentElement.style.setProperty("--blueprint-y", event.clientY + "px");
+      });
+      node.addEventListener("pointerleave", function () {
+        document.documentElement.classList.remove("blueprint-on");
+      });
+    });
+  }
+
+  function setupImageMasksAndAscii() {
+    Array.prototype.slice.call(document.querySelectorAll(".project-visual, .gallery-grid figure")).forEach(function (figure, index) {
+      var img = figure.querySelector("img");
+      if (!img) {
+        return;
+      }
+      figure.dataset.ascii = "/////\\\\\\\\\\n| CIVIL DATA |\\n\\\\\\\\\\/////";
+      if (!img.complete) {
+        figure.classList.add("loading-ascii");
+        img.addEventListener("load", function () {
+          figure.classList.remove("loading-ascii");
+        }, { once: true });
+      }
+      figure.style.setProperty("--mask-index", index);
+    });
+
+    function updateMasks() {
+      Array.prototype.slice.call(document.querySelectorAll(".project-visual img, .gallery-grid img")).forEach(function (img) {
+        var rect = img.getBoundingClientRect();
+        var visible = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+        img.style.setProperty("--image-mask", (Math.max(0, 36 - visible * 36)).toFixed(2) + "%");
+      });
+    }
+
+    updateMasks();
+    window.addEventListener("scroll", updateMasks, { passive: true });
+    window.addEventListener("resize", updateMasks);
   }
 
   function setupCopyEmail() {
@@ -288,7 +523,7 @@
     }
   }
 
-  function updateFavicon(direction) {
+  function updateFavicon(progress) {
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
     var link = document.querySelector("link[rel='icon']");
@@ -301,33 +536,14 @@
 
     ctx.fillStyle = "#000";
     ctx.fillRect(0, 0, 64, 64);
+    ctx.strokeStyle = "#f7f7f4";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(18, 10, 28, 44);
     ctx.fillStyle = "#9b111e";
-
-    if (direction === "up") {
-      ctx.beginPath();
-      ctx.moveTo(32, 12);
-      ctx.lineTo(50, 38);
-      ctx.lineTo(38, 38);
-      ctx.lineTo(38, 52);
-      ctx.lineTo(26, 52);
-      ctx.lineTo(26, 38);
-      ctx.lineTo(14, 38);
-      ctx.closePath();
-      ctx.fill();
-    } else if (direction === "down") {
-      ctx.beginPath();
-      ctx.moveTo(32, 52);
-      ctx.lineTo(50, 26);
-      ctx.lineTo(38, 26);
-      ctx.lineTo(38, 12);
-      ctx.lineTo(26, 12);
-      ctx.lineTo(26, 26);
-      ctx.lineTo(14, 26);
-      ctx.closePath();
-      ctx.fill();
-    } else {
-      ctx.fillRect(20, 20, 24, 24);
-    }
+    var fillHeight = Math.max(4, Math.min(40, Math.round((progress || 0) * 40)));
+    ctx.fillRect(22, 50 - fillHeight, 20, fillHeight);
+    ctx.fillStyle = "#f7f7f4";
+    ctx.fillRect(24, 6, 16, 4);
 
     link.href = canvas.toDataURL("image/png");
   }
@@ -799,6 +1015,7 @@
   }
 
   injectSvgFilter();
+  setupEngineeringBackdrop();
   setupPreloaderAndGreeting();
   setupTerminal();
   setupTelemetry();
@@ -806,12 +1023,16 @@
   setupScrollUi();
   setupNavigation();
   setupTocState();
+  setupCommandPalette();
   setupCopyEmail();
   setupMouseGlowAndIdle();
   setupSpringCursor();
   setupMagneticPhysics();
   setupMagnetizedBrand();
-  setupPseudoCodeSwap();
+  setupEngineeringTooltips();
+  setupStackCodeToggles();
+  setupBlueprintHover();
+  setupImageMasksAndAscii();
   setupCursorPreview();
   splitHeadings();
   setupMarquee();
