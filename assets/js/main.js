@@ -90,7 +90,7 @@
 
       lastScrollDirection = dy > 0 ? "down" : dy < 0 ? "up" : "still";
       document.documentElement.style.setProperty("--scroll-skew", skew.toFixed(3));
-      document.documentElement.style.setProperty("--topo-shift", (window.scrollY * -0.035).toFixed(2) + "px");
+      document.documentElement.style.setProperty("--topo-shift", (window.scrollY * -0.012).toFixed(2) + "px");
       document.documentElement.classList.add("velocity-skew");
 
       if (now - lastScrollUiUpdate > 140) {
@@ -137,15 +137,13 @@
       }
     });
 
-    var hour = new Date().getHours();
-    var light = Math.round(Math.max(0, Math.sin((hour / 24) * Math.PI)) * 10);
-    document.documentElement.style.setProperty("--time-light", String(light));
+    document.documentElement.style.setProperty("--time-light", "0");
 
     if (!prefersReducedMotion) {
       window.setInterval(function () {
         document.documentElement.style.setProperty("--grid-x", Math.round(Math.random() * 100) + "%");
         document.documentElement.style.setProperty("--grid-y", Math.round(Math.random() * 100) + "%");
-        document.documentElement.style.setProperty("--grid-pulse", "0.75");
+        document.documentElement.style.setProperty("--grid-pulse", "0.22");
         window.setTimeout(function () {
           document.documentElement.style.setProperty("--grid-pulse", "0");
         }, 180);
