@@ -6,7 +6,7 @@
   <meta name="description" content="Minimal editorial portfolio for Meshach Ando, civil and environmental engineering.">
   <title>Meshach Ando | Civil + Environmental Engineering</title>
   <link rel="icon" href="assets/icons/site-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=20260614b">
+  <link rel="stylesheet" href="assets/css/style.css?v=20260614c">
 </head>
 <body class="page-home">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -14,11 +14,15 @@
   <header class="site-nav" data-reveal>
     <a class="brand" href="./" aria-label="Meshach Ando home">MESHACH ANDO</a>
     <nav aria-label="Primary navigation">
-      <a href="water-resources/">Water Resources</a>
-      <a href="environmental/">Environmental</a>
-      <a href="geotech/">Geotechnical</a>
-      <a href="research/">Research</a>
-      <a href="assets/docs/Meshach_Ando_Full_CV.pdf">CV</a>
+      <details class="nav-menu">
+        <summary>Explore</summary>
+        <div class="nav-menu-panel">
+          <a href="#expertise">Expertise</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#news">News</a>
+          <a href="assets/docs/Meshach_Ando_Full_CV.pdf">CV</a>
+        </div>
+      </details>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -27,25 +31,30 @@
     <section class="home-hero home-intro frame" data-reveal>
       <img class="hero-profile" src="assets/images/profile/linkedin_profile.jpg" alt="Meshach Ando professional headshot">
       <h1>Meshach Ando</h1>
-      <p class="home-lines">Civil engineering graduate student working across infrastructure modeling, environmental systems, and engineering data analysis.</p>
+      <p class="home-lines">I study civil engineering and spend most of my time turning messy field problems into models, maps, and clear engineering stories.</p>
       <span class="short-rule" aria-hidden="true"></span>
       <div class="home-tabs" aria-label="Homepage sections">
-        <a class="button" href="#about">About Me</a>
-        <a class="button" href="#expertise">Expertise</a>
-        <a class="button" href="#contact">Contact Me</a>
+        <a class="button" href="#about">About</a>
+        <a class="button" href="#expertise">Explore Work</a>
+        <a class="button" href="#contact">Say Hello</a>
       </div>
+    </section>
+
+    <section class="status-strip" data-reveal aria-label="Current focus">
+      <span>Now</span>
+      <p>Graduate research, infrastructure modeling, landfill emissions work, and PE exam preparation.</p>
     </section>
 
     <section id="about" class="about-panel" data-reveal>
       <p class="eyebrow">About Me</p>
-      <h2>I am a civil engineering graduate student with experience modeling infrastructure systems and analyzing engineering-scale datasets.</h2>
-      <p>My work connects water resources, environmental systems, geotechnical context, and research methods into practical engineering decisions.</p>
+      <h2>I’m a civil engineering graduate student who likes work that sits between the field, the model, and the final decision.</h2>
+      <p>I care about water, waste systems, geotechnical context, and the data work that makes engineering evidence easier to trust.</p>
     </section>
 
     <section id="expertise" class="split-section" data-reveal>
       <div>
-        <p class="eyebrow">Four Entry Paths</p>
-        <h2>Focused portfolios with one connected research backbone.</h2>
+        <p class="eyebrow">Expertise</p>
+        <h2>Pick the doorway that matches what you came here to see.</h2>
       </div>
       <div class="path-grid">
         <a class="path-card path-water" href="water-resources/">
@@ -77,7 +86,7 @@
 
     <section class="stack-panel stack-lab" data-reveal>
       <p class="eyebrow">Technical Stack</p>
-      <h2>A lean workflow from field context to model output.</h2>
+      <h2>The tools change by project. The habit stays the same: understand, model, check, explain.</h2>
       <div class="stack-map">
         <article class="stack-node">
           <span>01 Model</span>
@@ -102,8 +111,56 @@
       </div>
     </section>
 
+    <section id="gallery" class="section-heading" data-reveal>
+      <p class="eyebrow">Gallery</p>
+      <h2>A quick visual pass through the kind of work this portfolio is built around.</h2>
+    </section>
+
+    <section class="gallery-grid" aria-label="Portfolio image gallery">
+      <figure data-reveal>
+        <img src="assets/images/realistic/water-network.jpg" alt="Drainage plans and water infrastructure model review">
+        <figcaption>Drainage networks</figcaption>
+      </figure>
+      <figure data-reveal>
+        <img src="assets/images/realistic/env-methane.jpg" alt="Methane monitoring and landfill model comparison workstation">
+        <figcaption>Methane modeling</figcaption>
+      </figure>
+      <figure data-reveal>
+        <img src="assets/images/realistic/geo-materials.jpg" alt="Soil and pavement materials testing setup">
+        <figcaption>Materials testing</figcaption>
+      </figure>
+      <figure data-reveal>
+        <img src="assets/images/realistic/research-hero.jpg" alt="Research desk with maps, plots, and environmental modeling notes">
+        <figcaption>Research workflow</figcaption>
+      </figure>
+    </section>
+
+    <section id="news" class="split-section news-section" data-reveal>
+      <div>
+        <p class="eyebrow">News</p>
+        <h2>Small updates, because the work is moving.</h2>
+      </div>
+      <div class="news-list">
+        <article>
+          <span>2026</span>
+          <h3>PE Civil Water Resources and Environmental exam preparation</h3>
+          <p>Currently preparing for the PE Civil Water Resources and Environmental exam scheduled for June 23, 2026.</p>
+        </article>
+        <article>
+          <span>2026</span>
+          <h3>Research portfolio now has its own lane</h3>
+          <p>Methane modeling, SEM inverse modeling, PFAS screening, and landfill cover work are grouped into one research page.</p>
+        </article>
+        <article>
+          <span>2025</span>
+          <h3>Environmental systems work presented through figures and code</h3>
+          <p>The site now gives recruiters and collaborators a faster way to move from visuals to methods to CVs.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="contact" class="contact-panel contact-home frame" data-reveal>
-      <p class="eyebrow">Contact Me</p>
+      <p class="eyebrow">Contact</p>
       <div class="contact-grid contact-links">
         <a class="contact-link" href="https://github.com/meshando-unf" rel="noopener"><span aria-hidden="true">GH</span> GitHub</a>
         <a class="contact-link" href="https://www.linkedin.com/in/meshachando" rel="noopener"><span aria-hidden="true">in</span> LinkedIn</a>
@@ -118,6 +175,6 @@
     <span>&copy; <span id="year">2026</span></span>
   </footer>
 
-  <script src="assets/js/main.js?v=20260614b"></script>
+  <script src="assets/js/main.js?v=20260614c"></script>
 </body>
 </html>

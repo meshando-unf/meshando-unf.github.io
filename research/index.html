@@ -6,18 +6,26 @@
   <meta name="description" content="Research portfolio for Meshach Ando.">
   <title>Research | Meshach Ando</title>
   <link rel="icon" href="../assets/icons/site-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/style.css?v=20260614b">
+  <link rel="stylesheet" href="../assets/css/style.css?v=20260614c">
 </head>
 <body class="page-research">
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-nav" data-reveal>
     <a class="brand" href="../">MESHACH ANDO</a>
     <nav aria-label="Primary navigation">
-      <a href="../water-resources/">Water Resources</a>
-      <a href="../environmental/">Environmental</a>
-      <a href="../geotech/">Geotechnical</a>
-      <a aria-current="page" href="./">Research</a>
-      <a href="../assets/docs/Meshach_Ando_Full_CV.pdf">CV</a>
+      <details class="nav-menu">
+        <summary>Explore</summary>
+        <div class="nav-menu-panel">
+          <a href="../#expertise">Expertise</a>
+          <a href="../water-resources/">Water Resources</a>
+          <a href="../environmental/">Environmental</a>
+          <a href="../geotech/">Geotechnical</a>
+          <a aria-current="page" href="./">Research</a>
+          <a href="../#gallery">Gallery</a>
+          <a href="../#news">News</a>
+          <a href="../assets/docs/Meshach_Ando_Full_CV.pdf">CV</a>
+        </div>
+      </details>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -27,7 +35,7 @@
       <span class="chapter-number">04</span>
       <p class="eyebrow">Meshach Ando</p>
       <h1>Research</h1>
-      <p class="lede">Methane Emissions. FOD Models. SEM. Satellite Data. PFAS.</p>
+      <p class="lede">This is the methods-heavy side of the site: methane, PFAS, field data, models, and the assumptions behind them.</p>
       <div class="button-row">
         <a class="button" href="#areas">View Research</a>
         <a class="button" href="../assets/docs/Meshach_Ando_Research_CV.pdf">Download Research CV</a>
@@ -41,7 +49,7 @@
 
     <section id="areas" class="section-heading" data-reveal>
       <p class="eyebrow">Research Areas</p>
-      <h2>Methods-forward research at the intersection of landfills, air, water, and exposure.</h2>
+      <h2>Research questions I keep coming back to because they sit between infrastructure, air, water, and public exposure.</h2>
     </section>
 
     <section class="project-list">
@@ -99,13 +107,30 @@
       </article>
     </section>
 
-    <section class="stack-panel" data-reveal>
-      <p class="eyebrow">Manuscripts</p>
-      <div class="stack-grid">
-        <div><h3>01</h3><p>Comparison of field measurements to methane emissions models at municipal solid waste landfills in the United States.</p></div>
-        <div><h3>02</h3><p>Generalizable cross-landfill methane estimation in waste management using machine learning and metaheuristics.</p></div>
-        <div><h3>03</h3><p>Volatile PFAS attenuation in landfill cover systems, with source-to-receptor risk screening context.</p></div>
-        <div><h3>04</h3><p>Landfill cover moisture, drainage performance, and methane oxidation behavior in engineered landfill soils.</p></div>
+    <section class="stack-panel stack-lab" data-reveal>
+      <p class="eyebrow">Research Stack</p>
+      <h2>I like research workflows where the assumptions are visible and the figures can be defended.</h2>
+      <div class="stack-map">
+        <article class="stack-node">
+          <span>01 Compare</span>
+          <h3>Models</h3>
+          <p>FOD model comparison, methane inventories, field measurements, and diagnostics.</p>
+        </article>
+        <article class="stack-node">
+          <span>02 Infer</span>
+          <h3>Emissions</h3>
+          <p>SEM observations, genetic algorithms, inverse modeling, and source estimation.</p>
+        </article>
+        <article class="stack-node">
+          <span>03 Screen</span>
+          <h3>Pathways</h3>
+          <p>PFAS dispersion, receptor distances, Monte Carlo checks, and uncertainty framing.</p>
+        </article>
+        <article class="stack-node">
+          <span>04 Publish</span>
+          <h3>Artifacts</h3>
+          <p>Python code, GIS figures, residual plots, manuscript visuals, and reproducible notes.</p>
+        </article>
       </div>
     </section>
 
@@ -173,6 +198,6 @@
     </section>
   </main>
   <footer class="site-footer"><span>Designed by Meshach Ando</span><span>Inspired by <a href="https://charanravi.com/" rel="noopener">Charan Ravi</a></span><span>&copy; <span id="year">2026</span></span></footer>
-  <script src="../assets/js/main.js?v=20260614b"></script>
+  <script src="../assets/js/main.js?v=20260614c"></script>
 </body>
 </html>
