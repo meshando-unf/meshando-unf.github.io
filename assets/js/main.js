@@ -112,18 +112,11 @@
   }
 
   function setupScrollUi() {
-    var meter = document.querySelector(".scroll-meter span");
     var backTop = document.querySelector(".back-top");
     var updateScrollUi = function () {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      var progress = max > 0 ? (window.scrollY / max) * 100 : 0;
-      if (meter) {
-        meter.style.setProperty("--scroll-progress", progress.toFixed(2) + "%");
-      }
       if (backTop) {
         backTop.classList.toggle("is-visible", window.scrollY > 420);
       }
-      document.documentElement.style.setProperty("--read-progress", progress.toFixed(2) + "%");
     };
 
     updateScrollUi();
@@ -134,7 +127,14 @@
 
   function setupNavigation() {
     var menus = Array.prototype.slice.call(document.querySelectorAll(".nav-menu"));
+    function syncMenuState() {
+      root.classList.toggle("menu-open", menus.some(function (menu) {
+        return menu.hasAttribute("open");
+      }));
+    }
+
     menus.forEach(function (menu) {
+      menu.addEventListener("toggle", syncMenuState);
       menu.addEventListener("click", function (event) {
         if (event.target.tagName === "A") {
           menu.removeAttribute("open");
@@ -151,6 +151,7 @@
           menu.removeAttribute("open");
         }
       });
+      syncMenuState();
     });
 
     document.addEventListener("keydown", function (event) {
@@ -158,7 +159,41 @@
         menus.forEach(function (menu) {
           menu.removeAttribute("open");
         });
+        syncMenuState();
       }
+    });
+  }
+
+  function setupTocState() {
+    var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".side-toc a[href^='#']"));
+    if (!tocLinks.length || !("IntersectionObserver" in window)) {
+      return;
+    }
+    var linkMap = tocLinks.reduce(function (map, link) {
+      var id = link.getAttribute("href").slice(1);
+      var target = document.getElementById(id);
+      if (target) {
+        map[id] = link;
+      }
+      return map;
+    }, {});
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        tocLinks.forEach(function (link) {
+          link.classList.remove("is-active");
+        });
+        var active = linkMap[entry.target.id];
+        if (active) {
+          active.classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px", threshold: 0.01 });
+
+    Object.keys(linkMap).forEach(function (id) {
+      observer.observe(document.getElementById(id));
     });
   }
 
@@ -337,19 +372,16 @@
     var glow = document.createElement("div");
     var dimmer = document.createElement("div");
     var noise = document.createElement("div");
-    var coords = document.createElement("div");
     var snapDot = document.createElement("div");
     var idleTimer;
     var lastMouse = { x: 0, y: 0, time: performance.now() };
     glow.className = "mouse-glow";
     dimmer.className = "focus-dimmer";
     noise.className = "noise-field";
-    coords.className = "coord-tracker";
     snapDot.className = "snap-dot";
     document.body.appendChild(glow);
     document.body.appendChild(dimmer);
     document.body.appendChild(noise);
-    document.body.appendChild(coords);
     document.body.appendChild(snapDot);
 
     function wake() {
@@ -372,7 +404,6 @@
       glow.style.left = event.clientX + "px";
       glow.style.top = event.clientY + "px";
       noise.style.setProperty("--noise-opacity", (0.035 + speed * 0.11).toFixed(3));
-      coords.textContent = "X " + event.clientX + " / Y " + event.clientY;
       snapDot.style.transform = "translate3d(" + snapX + "px," + snapY + "px,0)";
       document.documentElement.style.setProperty("--edge-back-y", event.clientY + "px");
       lastMouse = { x: event.clientX, y: event.clientY, time: now };
@@ -724,25 +755,6 @@
     });
   }
 
-  function injectReadTime() {
-    var main = document.querySelector("main");
-    if (!main || document.querySelector(".read-time-pill")) {
-      return;
-    }
-    var words = main.innerText.trim().split(/\s+/).filter(Boolean).length;
-    if (words < 180) {
-      return;
-    }
-    var minutes = Math.max(1, Math.ceil(words / 220));
-    var pill = document.createElement("p");
-    var anchor = document.querySelector(".chapter-hero, .status-strip");
-    pill.className = "read-time-pill";
-    pill.textContent = minutes + " min read";
-    if (anchor) {
-      anchor.insertAdjacentElement("afterend", pill);
-    }
-  }
-
   function setupMarquee() {
     var footer = document.querySelector(".site-footer");
     if (!footer || document.querySelector(".skill-marquee")) {
@@ -793,6 +805,7 @@
   setupMomentumScroll();
   setupScrollUi();
   setupNavigation();
+  setupTocState();
   setupCopyEmail();
   setupMouseGlowAndIdle();
   setupSpringCursor();
@@ -801,7 +814,6 @@
   setupPseudoCodeSwap();
   setupCursorPreview();
   splitHeadings();
-  injectReadTime();
   setupMarquee();
   setupDynamicTitle();
   setupMatrixMode();
