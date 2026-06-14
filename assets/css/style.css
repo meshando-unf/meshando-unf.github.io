@@ -36,11 +36,6 @@ body {
   line-height: 1.5;
 }
 
-.cursor-enabled,
-.cursor-enabled * {
-  cursor: none !important;
-}
-
 ::-webkit-scrollbar {
   width: 3px;
 }
@@ -75,6 +70,7 @@ a:hover {
 
 button {
   font: inherit;
+  cursor: pointer;
 }
 
 img {
@@ -140,8 +136,7 @@ main,
 }
 
 .site-nav nav a,
-.nav-menu summary,
-.nav-command {
+.nav-menu summary {
   position: relative;
   border: 0;
   border-radius: 999px;
@@ -158,9 +153,7 @@ main,
 
 .site-nav nav a:hover,
 .nav-menu summary:hover,
-.nav-menu[open] summary,
-.nav-command:hover,
-.nav-command:focus-visible {
+.nav-menu[open] summary {
   background: var(--red);
   color: var(--white);
   opacity: 1;
@@ -251,6 +244,60 @@ main,
 .nav-menu-panel a:focus-visible {
   background: transparent;
   color: var(--red-bright);
+}
+
+.side-toc {
+  position: fixed;
+  right: 0.7rem;
+  top: 50%;
+  z-index: 7;
+  display: grid;
+  gap: 0.36rem;
+  transform: translateY(-50%);
+  opacity: 0.34;
+  transition: opacity 160ms ease;
+}
+
+.side-toc:hover,
+.side-toc:focus-within {
+  opacity: 0.92;
+}
+
+.side-toc a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  min-height: 1rem;
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform-origin: right center;
+}
+
+.side-toc a::after {
+  content: "";
+  width: 0.42rem;
+  height: 1px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.8;
+  transition: width 140ms ease, background 140ms ease;
+}
+
+.side-toc a:hover,
+.side-toc a:focus-visible {
+  color: var(--red-bright);
+}
+
+.side-toc a:hover::after,
+.side-toc a:focus-visible::after {
+  width: 1.4rem;
+  background: var(--red-bright);
 }
 
 main {
@@ -828,6 +875,7 @@ h3 {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  cursor: pointer;
   transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
@@ -1476,64 +1524,6 @@ h3 {
   color: var(--red-bright);
 }
 
-.command-dialog {
-  width: min(720px, calc(100% - 2rem));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  padding: clamp(1rem, 3vw, 1.4rem);
-  background: #000;
-  color: var(--white);
-}
-
-.command-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.82);
-}
-
-.command-dialog h2 {
-  margin-bottom: 1rem;
-}
-
-.command-close {
-  float: right;
-  border: 0;
-  border-radius: 999px;
-  padding: 0.45rem 0.65rem;
-  background: transparent;
-  color: var(--white);
-  cursor: pointer;
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.command-close:hover,
-.command-close:focus-visible {
-  background: var(--red);
-}
-
-.command-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.4rem;
-}
-
-.command-grid a {
-  border-radius: 999px;
-  padding: 0.68rem 0.85rem;
-  color: var(--white);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.command-grid a:hover,
-.command-grid a:focus-visible {
-  background: var(--red);
-  color: var(--white);
-}
-
 .back-top {
   position: fixed;
   right: 1rem;
@@ -1708,8 +1698,7 @@ h3 {
 .matrix-mode .path-card,
 .matrix-mode .project-visual,
 .matrix-mode .gallery-grid figure,
-.matrix-mode .nav-menu-panel,
-.matrix-mode .command-dialog {
+.matrix-mode .nav-menu-panel {
   outline: 1px solid var(--red);
 }
 
@@ -1739,14 +1728,6 @@ h3 {
 .velocity-skew .project-visual {
   transform: skewY(calc(var(--scroll-skew, 0) * 1deg));
   transition: transform 160ms ease-out;
-}
-
-.invert-tools-mode {
-  --black: #f7f7f4;
-  --white: #000;
-  --muted: #000;
-  --quiet: #111;
-  --line: rgba(0, 0, 0, 0.16);
 }
 
 .snap-dot {
@@ -1943,9 +1924,12 @@ h3 {
   .figure-grid,
   .gallery-grid,
   .news-list,
-  .proof-strip,
-  .command-grid {
+  .proof-strip {
     grid-template-columns: 1fr;
+  }
+
+  .side-toc {
+    display: none;
   }
 
   .feature-panel {

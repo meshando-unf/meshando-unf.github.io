@@ -79,6 +79,7 @@
 
   function setupMomentumScroll() {
     var settleTimer;
+    var lastScrollUiUpdate = 0;
 
     window.addEventListener("scroll", function () {
       var now = performance.now();
@@ -90,8 +91,12 @@
       lastScrollDirection = dy > 0 ? "down" : dy < 0 ? "up" : "still";
       document.documentElement.style.setProperty("--scroll-skew", skew.toFixed(3));
       document.documentElement.classList.add("velocity-skew");
-      updateFavicon(lastScrollDirection);
-      writeTerminal("> Scroll depth: " + Math.round(window.scrollY) + "px");
+
+      if (now - lastScrollUiUpdate > 140) {
+        updateFavicon(lastScrollDirection);
+        writeTerminal("> Scroll depth: " + Math.round(window.scrollY) + "px");
+        lastScrollUiUpdate = now;
+      }
 
       window.clearTimeout(settleTimer);
       settleTimer = window.setTimeout(function () {
@@ -134,6 +139,9 @@
         if (event.target.tagName === "A") {
           menu.removeAttribute("open");
         }
+        if (event.target.classList && event.target.classList.contains("nav-menu-panel")) {
+          menu.removeAttribute("open");
+        }
       });
     });
 
@@ -150,42 +158,6 @@
         menus.forEach(function (menu) {
           menu.removeAttribute("open");
         });
-      }
-    });
-  }
-
-  function setupCommandDialog() {
-    var commandDialog = document.querySelector(".command-dialog");
-    var commandOpeners = Array.prototype.slice.call(document.querySelectorAll("[data-command-open]"));
-    var openCommand = function () {
-      if (!commandDialog) {
-        return;
-      }
-      if (typeof commandDialog.showModal === "function") {
-        commandDialog.showModal();
-      } else {
-        commandDialog.setAttribute("open", "");
-      }
-    };
-
-    commandOpeners.forEach(function (button) {
-      button.addEventListener("click", openCommand);
-    });
-
-    if (commandDialog) {
-      commandDialog.addEventListener("click", function (event) {
-        if (event.target.tagName === "A") {
-          commandDialog.close();
-        }
-      });
-    }
-
-    document.addEventListener("keydown", function (event) {
-      var target = event.target;
-      var isTyping = target && /input|textarea|select/i.test(target.tagName || "");
-      if (!isTyping && (event.key === "/" || (event.ctrlKey && event.key.toLowerCase() === "k"))) {
-        event.preventDefault();
-        openCommand();
       }
     });
   }
@@ -422,7 +394,6 @@
     var current = { x: target.x, y: target.y };
     cursor.className = "spring-cursor";
     document.body.appendChild(cursor);
-    document.documentElement.classList.add("cursor-enabled");
 
     document.addEventListener("pointermove", function (event) {
       target.x = event.clientX;
@@ -444,7 +415,7 @@
       return;
     }
 
-    var targets = Array.prototype.slice.call(document.querySelectorAll(".button, .text-link, .contact-link, .nav-command, .nav-menu summary, .command-grid a"));
+    var targets = Array.prototype.slice.call(document.querySelectorAll(".button, .text-link, .contact-link, .nav-menu summary, .side-toc a"));
     targets.forEach(function (node) {
       var position = { x: 0, y: 0 };
       var velocity = { x: 0, y: 0 };
@@ -592,19 +563,6 @@
     });
   }
 
-  function setupToolsInversion() {
-    var target = document.querySelector(".stack-lab");
-    if (!target || !("IntersectionObserver" in window)) {
-      return;
-    }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        document.documentElement.classList.toggle("invert-tools-mode", entry.isIntersecting);
-      });
-    }, { threshold: 0.45 });
-    observer.observe(target);
-  }
-
   function setupScreensaver() {
     if (document.querySelector(".screensaver-cube")) {
       return;
@@ -729,7 +687,7 @@
     }
 
     Array.prototype.slice.call(document.querySelectorAll("main h1, main h2")).forEach(function (heading) {
-      if (heading.closest(".command-dialog") || heading.dataset.split) {
+      if (heading.dataset.split) {
         return;
       }
       var text = heading.textContent.trim();
@@ -835,7 +793,6 @@
   setupMomentumScroll();
   setupScrollUi();
   setupNavigation();
-  setupCommandDialog();
   setupCopyEmail();
   setupMouseGlowAndIdle();
   setupSpringCursor();
@@ -849,7 +806,6 @@
   setupDynamicTitle();
   setupMatrixMode();
   setupSecretModes();
-  setupToolsInversion();
   setupScreensaver();
   setupGyroParallax();
   setupSonarPing();
