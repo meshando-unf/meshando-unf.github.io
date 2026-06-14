@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Meshach Ando site icon</title>
+  <desc id="desc">Minimal engineering monogram with water, land, and data references.</desc>
+  <rect width="64" height="64" rx="18" fill="#000"/>
+  <path d="M14 45V19h7l11 17 11-17h7v26h-7V31L34 45h-4L21 31v14z" fill="#f7f7f4"/>
+  <path d="M13 50h38" stroke="#9b111e" stroke-width="4" stroke-linecap="round"/>
+  <path d="M45 13c5 5 7 9 7 13a7 7 0 1 1-14 0c0-4 2-8 7-13z" fill="#0a66c2"/>
+  <circle cx="19" cy="14" r="4" fill="#70c947"/>
+</svg>
