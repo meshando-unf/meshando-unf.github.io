@@ -1,12 +1,12 @@
 :root {
-  --black: #030303;
-  --charcoal: #0d0d0f;
-  --panel: #121214;
-  --panel-soft: #171719;
+  --black: #000;
+  --charcoal: #000;
+  --panel: #000;
+  --panel-soft: #000;
   --white: #f7f7f4;
-  --muted: #9c9c9c;
-  --quiet: #5f5f5f;
-  --line: rgba(255, 255, 255, 0.12);
+  --muted: #deded8;
+  --quiet: #8a8a8a;
+  --line: rgba(255, 255, 255, 0.09);
   --red: #9b111e;
   --red-bright: #d1192a;
   --radius: 14px;
@@ -80,10 +80,10 @@ main,
   justify-content: space-between;
   gap: 1.25rem;
   padding: 1rem 0;
-  border-bottom: 1px solid var(--line);
-  background: rgba(3, 3, 3, 0.86);
+  border-bottom: 0;
+  background: rgba(0, 0, 0, 0.86);
   backdrop-filter: blur(16px);
-  color: var(--muted);
+  color: var(--white);
   font-family: var(--mono);
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -104,12 +104,14 @@ main,
 }
 
 .site-nav nav a {
-  color: var(--muted);
+  color: var(--white);
+  opacity: 0.72;
 }
 
 .site-nav nav a:hover,
 .site-nav a[aria-current="page"] {
   color: var(--red-bright);
+  opacity: 1;
 }
 
 main {
@@ -130,9 +132,9 @@ main {
 .home-art,
 .hero-art,
 .profile-card {
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: var(--radius);
-  background: var(--panel);
+  background: transparent;
 }
 
 .home-hero,
@@ -163,8 +165,8 @@ main {
   content: "";
   position: absolute;
   inset: 0 auto auto 0;
-  width: 100%;
-  height: 3px;
+  width: 4.5rem;
+  height: 2px;
   background: var(--red);
   pointer-events: none;
 }
@@ -245,7 +247,7 @@ h3 {
 .lede {
   max-width: 650px;
   margin-bottom: 0.9rem;
-  color: var(--muted);
+  color: var(--white);
   font-size: clamp(0.95rem, 1.35vw, 1.15rem);
   font-weight: 500;
   line-height: 1.32;
@@ -256,7 +258,7 @@ h3 {
   left: 1.15rem;
   top: 1rem;
   z-index: 1;
-  color: rgba(255, 255, 255, 0.035);
+  color: rgba(255, 255, 255, 0.025);
   font-size: clamp(3rem, 9vw, 6rem);
   font-weight: 800;
   line-height: 0.8;
@@ -269,14 +271,14 @@ h3 {
   gap: 0.85rem;
   max-width: 420px;
   margin: 0 0 0.9rem;
-  padding: 0.6rem;
-  background: var(--charcoal);
+  padding: 0;
+  background: transparent;
 }
 
 .profile-card img {
   width: 3.75rem;
   aspect-ratio: 1;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 50%;
   object-fit: cover;
   object-position: 50% 22%;
@@ -284,7 +286,7 @@ h3 {
 
 .profile-card p {
   margin: 0;
-  color: var(--muted);
+  color: var(--white);
   font-size: 0.8rem;
   line-height: 1.35;
 }
@@ -351,7 +353,7 @@ h3 {
   bottom: 0.8rem;
   z-index: 2;
   padding: 0.62rem 0.7rem;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 10px;
   background: rgba(3, 3, 3, 0.74);
   color: var(--white);
@@ -377,7 +379,7 @@ h3 {
   align-items: center;
   justify-content: center;
   min-height: 2.3rem;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 10px;
   padding: 0.62rem 0.85rem;
   background: transparent;
@@ -398,7 +400,8 @@ h3 {
 }
 
 .button.ghost {
-  color: var(--muted);
+  color: var(--white);
+  opacity: 0.72;
 }
 
 .split-section,
@@ -415,7 +418,7 @@ h3 {
   grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
   gap: clamp(1.25rem, 4vw, 3rem);
   align-items: start;
-  border-top: 1px solid var(--line);
+  border-top: 0;
   padding-top: clamp(1rem, 2.4vw, 1.6rem);
 }
 
@@ -436,16 +439,17 @@ h3 {
 .figure-grid > div {
   min-height: auto;
   padding: clamp(0.9rem, 2vw, 1.2rem);
-  background: var(--panel);
+  background: transparent;
 }
 
 .path-card {
   position: relative;
   display: grid;
   align-content: end;
-  min-height: 11rem;
+  min-height: 10rem;
   overflow: hidden;
   color: var(--white);
+  border-radius: var(--radius);
 }
 
 .path-card:hover {
@@ -506,7 +510,7 @@ h3 {
 .metrics,
 .contact-grid,
 .stack-grid p {
-  color: var(--muted);
+  color: var(--white);
 }
 
 .project-list {
@@ -518,10 +522,11 @@ h3 {
   grid-template-columns: 0.12fr 1fr 0.48fr;
   gap: clamp(0.8rem, 2vw, 1.4rem);
   min-height: 0;
-  margin-top: 0.8rem;
-  padding: clamp(0.75rem, 1.6vw, 1rem);
+  margin-top: 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
   align-items: center;
-  background: var(--charcoal);
+  background: transparent;
 }
 
 .project-copy {
@@ -548,6 +553,7 @@ h3 {
   min-height: 0;
   overflow: hidden;
   background: #070707;
+  border-radius: var(--radius);
 }
 
 .project-visual img {
@@ -564,7 +570,7 @@ h3 {
   right: 0.6rem;
   bottom: 0.6rem;
   padding: 0.5rem 0.55rem;
-  border: 1px solid var(--line);
+  border: 0;
   border-radius: 8px;
   background: rgba(3, 3, 3, 0.74);
   color: var(--white);
@@ -583,7 +589,7 @@ h3 {
 .stack-panel,
 .contact-panel,
 .research-strip {
-  padding: clamp(0.85rem, 2vw, 1.15rem);
+  padding: 0;
 }
 
 .note-list {
@@ -593,8 +599,8 @@ h3 {
 
 .note-list p {
   margin: 0;
-  padding: 0.8rem;
-  background: var(--panel);
+  padding: 0;
+  background: transparent;
 }
 
 .research-strip ul {
@@ -603,7 +609,7 @@ h3 {
   margin: 0 0 1.2rem;
   padding: 0;
   list-style: none;
-  color: var(--muted);
+  color: var(--white);
   font-size: clamp(1rem, 2vw, 1.45rem);
   line-height: 1.15;
 }
@@ -613,7 +619,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  border-top: 1px solid var(--line);
+  border-top: 0;
   padding-top: clamp(0.9rem, 2vw, 1.3rem);
 }
 
@@ -622,6 +628,9 @@ h3 {
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 1rem;
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .contact-panel h2,
@@ -654,7 +663,7 @@ h3 {
 }
 
 .contact-grid a {
-  color: var(--muted);
+  color: var(--white);
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
@@ -670,8 +679,9 @@ h3 {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 0 1.5rem;
-  border-top: 1px solid var(--line);
-  color: var(--quiet);
+  border-top: 0;
+  color: var(--white);
+  opacity: 0.42;
   font-family: var(--mono);
   font-size: 0.64rem;
   letter-spacing: 0.1em;
