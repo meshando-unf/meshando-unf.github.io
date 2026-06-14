@@ -819,7 +819,6 @@
   setupMatrixMode();
   setupSecretModes();
   setupScreensaver();
-  setupGyroParallax();
   setupSonarPing();
   setupProximityType();
   setupPageTransitions();
