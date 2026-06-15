@@ -1810,10 +1810,29 @@ h3 {
   transition: background 120ms ease, transform 120ms ease;
 }
 
-.availability-arrow span {
-  display: inline-block;
+.availability-arrow .chevron-stack {
+  display: inline-grid;
+  gap: 0.05rem;
+  width: 0.75rem;
   color: var(--red-bright);
   animation: arrowNudge 820ms ease-in-out infinite;
+}
+
+.availability-arrow .chevron-stack i {
+  display: block;
+  width: 0.52rem;
+  height: 0.52rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.availability-arrow .chevron-stack i:nth-child(2) {
+  opacity: 0.72;
+}
+
+.availability-arrow .chevron-stack i:nth-child(3) {
+  opacity: 0.45;
 }
 
 .availability-arrow:hover,
@@ -1822,14 +1841,14 @@ h3 {
   transform: translateY(-1px);
 }
 
-.availability-arrow:hover span,
-.availability-arrow:focus-visible span {
+.availability-arrow:hover .chevron-stack,
+.availability-arrow:focus-visible .chevron-stack {
   color: var(--white);
 }
 
 @keyframes arrowNudge {
   0%, 100% {
-    transform: translateX(0);
+    transform: translateY(-0.05rem);
   }
 
   50% {
