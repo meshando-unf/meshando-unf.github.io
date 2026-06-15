@@ -181,9 +181,7 @@ main,
   gap: 1.25rem;
   padding: 1rem 0;
   border-bottom: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025));
-  backdrop-filter: blur(22px) saturate(150%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  background: rgba(0, 0, 0, 0.86);
   color: var(--white);
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -392,11 +390,9 @@ main,
   transform: translateY(-50%);
   border-radius: 999px;
   padding: 0.55rem 0.35rem;
-  background: rgba(0, 0, 0, 0.26);
+  background: rgba(0, 0, 0, 0.18);
   opacity: 0.48;
   pointer-events: auto;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: opacity 140ms ease, transform 140ms ease;
 }
 
@@ -630,25 +626,6 @@ main {
   background: transparent;
 }
 
-.frame,
-.stack-panel,
-.contact-panel,
-.research-strip,
-.project-block,
-.feature-panel,
-.status-strip,
-.proof-strip article,
-.news-list article,
-.resume-list a {
-  border: 1px solid rgba(255, 255, 255, 0.085);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.018) 58%),
-    rgba(0, 0, 0, 0.24);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.075);
-  backdrop-filter: blur(18px) saturate(145%);
-  -webkit-backdrop-filter: blur(18px) saturate(145%);
-}
-
 .home-hero,
 .chapter-hero {
   position: relative;
@@ -849,8 +826,6 @@ h3 {
   gap: 0.7rem;
   max-width: 760px;
   margin: clamp(1.5rem, 4vw, 2.7rem) auto 0;
-  border-radius: 999px;
-  padding: 0.72rem 1rem;
   text-align: center;
 }
 
@@ -880,8 +855,8 @@ h3 {
   gap: 0.35rem;
   min-height: 7rem;
   align-content: end;
-  border-radius: var(--radius);
-  padding: 0.95rem 1rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .proof-strip span {
@@ -1021,7 +996,9 @@ h3 {
 }
 
 .button,
-.text-link {
+.text-link,
+.code-toggle,
+.news-more summary {
   position: relative;
   overflow: hidden;
   display: inline-flex;
@@ -1069,7 +1046,11 @@ h3 {
 }
 
 .button:hover,
-.text-link:hover {
+.text-link:hover,
+.code-toggle:hover,
+.code-toggle:focus-visible,
+.news-more summary:hover,
+.news-more summary:focus-visible {
   border-color: var(--red);
   background: var(--red);
   color: var(--white);
@@ -1246,8 +1227,9 @@ h3 {
   gap: clamp(1rem, 3vw, 2rem);
   align-items: end;
   margin-top: clamp(2.8rem, 6vw, 5rem);
-  border-radius: var(--radius);
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.25rem, 3vw, 2rem) 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .feature-panel h2,
@@ -1295,9 +1277,8 @@ h3 {
   display: grid;
   align-content: start;
   min-height: 12rem;
-  border-radius: calc(var(--radius) - 8px);
-  padding: 3rem 1rem 1rem;
-  background: rgba(255, 255, 255, 0.045);
+  padding: 3rem 0 0;
+  background: transparent;
 }
 
 .stack-node::before {
@@ -1348,22 +1329,10 @@ h3 {
 .code-toggle {
   width: fit-content;
   margin-top: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
+  min-height: 1.9rem;
   padding: 0.38rem 0.56rem;
-  background: transparent;
-  color: var(--white);
-  font-family: var(--mono);
   font-size: 0.58rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.code-toggle:hover,
-.code-toggle:focus-visible {
-  border-color: var(--red);
-  background: var(--red);
 }
 
 .stack-node pre {
@@ -1553,12 +1522,13 @@ h3 {
 .news-list article {
   display: grid;
   gap: 0.35rem;
-  border-radius: calc(var(--radius) - 6px);
-  padding: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .news-list article:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.085);
+  border-bottom: 0;
+  padding-bottom: 0;
 }
 
 .news-more {
@@ -1568,17 +1538,10 @@ h3 {
 
 .news-more summary {
   width: fit-content;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 999px;
   padding: 0.58rem 0.78rem;
-  color: var(--white);
-  cursor: pointer;
-  font-family: var(--mono);
   font-size: 0.65rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
   list-style: none;
-  text-transform: uppercase;
 }
 
 .news-more summary::-webkit-details-marker {
@@ -1592,12 +1555,6 @@ h3 {
 
 .news-more[open] summary::after {
   content: " -";
-}
-
-.news-more summary:hover,
-.news-more summary:focus-visible {
-  border-color: var(--red);
-  background: var(--red);
 }
 
 .news-list-extra {
@@ -1744,9 +1701,10 @@ h3 {
   align-items: center;
   column-gap: 1rem;
   row-gap: 0.18rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 0.85rem 1rem;
+  background: transparent;
   transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
 }
 
