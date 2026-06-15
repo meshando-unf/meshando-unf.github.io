@@ -29,26 +29,8 @@
   }
 
   function setupPreloaderAndGreeting() {
-    var homeLine = document.querySelector(".home-lines");
     var seenKey = "meshachando_portfolio_seen";
     var seenBefore = localStorage.getItem(seenKey) === "yes";
-    var hour = new Date().getHours();
-    var greeting = "Good afternoon";
-
-    if (seenBefore) {
-      greeting = "Welcome back, Meshach";
-    } else if (hour < 5) {
-      greeting = "Late night coding?";
-    } else if (hour < 12) {
-      greeting = "Good morning";
-    } else if (hour >= 18) {
-      greeting = "Good evening";
-    }
-
-    if (homeLine && !homeLine.dataset.greeted) {
-      homeLine.textContent = greeting + " - " + homeLine.textContent;
-      homeLine.dataset.greeted = "true";
-    }
 
     if (seenBefore || prefersReducedMotion) {
       return;
@@ -464,74 +446,6 @@
     window.addEventListener("resize", updateMasks);
   }
 
-  function setupCopyEmail() {
-    var copyButtons = Array.prototype.slice.call(document.querySelectorAll("[data-copy-email]"));
-    copyButtons.forEach(function (button) {
-      var holdTimer = null;
-      var progressTimer = null;
-      var progress = 0;
-      button.classList.add("hold-copy");
-
-      function setProgress(value) {
-        progress = value;
-        button.style.setProperty("--hold-progress", progress + "%");
-      }
-
-      function feedback(text) {
-        var node = document.querySelector(".copy-feedback");
-        if (node) {
-          node.textContent = text;
-        }
-        writeTerminal("> Clipboard: " + text);
-      }
-
-      function reset() {
-        window.clearTimeout(holdTimer);
-        window.clearInterval(progressTimer);
-        setProgress(0);
-      }
-
-      function finish() {
-        var email = button.getAttribute("data-email") || "";
-        var encoded = window.btoa(email);
-        setProgress(100);
-        feedback(encoded);
-
-        var done = function () {
-          window.setTimeout(function () {
-            feedback("COPIED TO CLIPBOARD");
-            reset();
-          }, 500);
-        };
-
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(email).then(done).catch(function () {
-            window.location.href = "mailto:" + email;
-          });
-        } else {
-          window.location.href = "mailto:" + email;
-        }
-      }
-
-      button.addEventListener("pointerdown", function () {
-        reset();
-        writeTerminal("> Hold to copy: email");
-        progressTimer = window.setInterval(function () {
-          setProgress(Math.min(100, progress + 5));
-        }, 42);
-        holdTimer = window.setTimeout(finish, 850);
-      });
-
-      ["pointerup", "pointerleave", "pointercancel"].forEach(function (eventName) {
-        button.addEventListener(eventName, function () {
-          if (progress < 100) {
-            reset();
-          }
-        });
-      });
-    });
-  }
-
   function setupTerminal() {
     if (terminalNode) {
       return;
@@ -653,7 +567,6 @@
       glow.style.top = event.clientY + "px";
       noise.style.setProperty("--noise-opacity", (0.035 + speed * 0.11).toFixed(3));
       snapDot.style.transform = "translate3d(" + snapX + "px," + snapY + "px,0)";
-      document.documentElement.style.setProperty("--edge-back-y", event.clientY + "px");
       lastMouse = { x: event.clientX, y: event.clientY, time: now };
       wake();
     }, { passive: true });
@@ -677,6 +590,20 @@
     document.addEventListener("pointermove", function (event) {
       target.x = event.clientX;
       target.y = event.clientY;
+      var hovered = document.elementFromPoint(event.clientX, event.clientY);
+      cursor.classList.toggle("is-link", !!(hovered && hovered.closest && hovered.closest("a[href], button, summary")));
+    }, { passive: true });
+
+    document.addEventListener("pointerover", function (event) {
+      if (event.target.closest && event.target.closest("a[href], button, summary")) {
+        cursor.classList.add("is-link");
+      }
+    }, { passive: true });
+
+    document.addEventListener("pointerout", function (event) {
+      if (event.target.closest && event.target.closest("a[href], button, summary")) {
+        cursor.classList.remove("is-link");
+      }
     }, { passive: true });
 
     function tick() {
@@ -786,49 +713,6 @@
       node.addEventListener("mouseleave", function () {
         paragraph.textContent = original;
       });
-    });
-  }
-
-  function setupPageTransitions() {
-    if (prefersReducedMotion || document.querySelector(".page-curtain")) {
-      return;
-    }
-    var curtain = document.createElement("div");
-    curtain.className = "page-curtain";
-    curtain.innerHTML = "<span></span><span></span><span></span>";
-    document.body.appendChild(curtain);
-
-    function resetCurtain() {
-      curtain.classList.remove("is-active");
-      Array.prototype.slice.call(document.querySelectorAll(".glitching")).forEach(function (node) {
-        node.classList.remove("glitching");
-      });
-    }
-
-    window.addEventListener("pageshow", resetCurtain);
-    window.addEventListener("focus", resetCurtain);
-    document.addEventListener("visibilitychange", function () {
-      if (!document.hidden) {
-        resetCurtain();
-      }
-    });
-
-    document.addEventListener("click", function (event) {
-      var link = event.target.closest && event.target.closest("a[href]");
-      if (!link || link.target || link.hasAttribute("download") || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-        return;
-      }
-      var href = link.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("http") || href.indexOf(".pdf") !== -1) {
-        return;
-      }
-      event.preventDefault();
-      link.classList.add("glitching");
-      curtain.classList.add("is-active");
-      writeTerminal("> Navigating: " + href);
-      window.setTimeout(function () {
-        window.location.href = href;
-      }, 310);
     });
   }
 
@@ -1049,18 +933,6 @@
     });
   }
 
-  function setupEdgeBack() {
-    var isHome = location.pathname === "/" || location.pathname.endsWith("/index.html");
-    if (isHome || document.querySelector(".edge-back")) {
-      return;
-    }
-    var back = document.createElement("a");
-    back.className = "edge-back";
-    back.href = "../";
-    back.textContent = "\u2190 Back";
-    document.body.appendChild(back);
-  }
-
   injectSvgFilter();
   setupEngineeringBackdrop();
   setupPreloaderAndGreeting();
@@ -1072,7 +944,6 @@
   setupTocState();
   setupLinkTargets();
   setupCommandPalette();
-  setupCopyEmail();
   setupMouseGlowAndIdle();
   setupSpringCursor();
   setupMagneticPhysics();
@@ -1090,7 +961,5 @@
   setupScreensaver();
   setupSonarPing();
   setupProximityType();
-  setupPageTransitions();
-  setupEdgeBack();
   setupReveal();
 }());
