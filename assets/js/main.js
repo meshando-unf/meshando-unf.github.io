@@ -153,10 +153,23 @@
 
   function setupNavigation() {
     var menus = Array.prototype.slice.call(document.querySelectorAll(".nav-menu"));
+    function alignMenuPanel(menu) {
+      var panel = menu.querySelector(".nav-menu-panel");
+      if (!panel || !menu.hasAttribute("open")) {
+        return;
+      }
+      panel.style.setProperty("--menu-nudge-x", "0px");
+      window.requestAnimationFrame(function () {
+        var rect = panel.getBoundingClientRect();
+        panel.style.setProperty("--menu-nudge-x", Math.round(-rect.left) + "px");
+      });
+    }
+
     function syncMenuState() {
       root.classList.toggle("menu-open", menus.some(function (menu) {
         return menu.hasAttribute("open");
       }));
+      menus.forEach(alignMenuPanel);
     }
 
     menus.forEach(function (menu) {
@@ -187,6 +200,10 @@
         });
         syncMenuState();
       }
+    });
+
+    window.addEventListener("resize", function () {
+      menus.forEach(alignMenuPanel);
     });
   }
 
@@ -222,6 +239,23 @@
       observer.observe(document.getElementById(id));
     });
   }
+
+  function setupLinkTargets() {
+    Array.prototype.slice.call(document.querySelectorAll("a[href]")).forEach(function (link) {
+      var href = link.getAttribute("href") || "";
+      var isPdf = href.indexOf(".pdf") !== -1;
+      var isExternal = /^https?:\/\//i.test(href) && !href.includes(location.hostname);
+      if (isPdf || isExternal) {
+        link.target = "_blank";
+        var rel = (link.getAttribute("rel") || "").split(/\s+/).filter(Boolean);
+        if (rel.indexOf("noopener") === -1) {
+          rel.push("noopener");
+        }
+        link.setAttribute("rel", rel.join(" "));
+      }
+    });
+  }
+
 
   function setupCommandPalette() {
     if (document.querySelector(".command-palette")) {
@@ -764,13 +798,28 @@
     curtain.innerHTML = "<span></span><span></span><span></span>";
     document.body.appendChild(curtain);
 
+    function resetCurtain() {
+      curtain.classList.remove("is-active");
+      Array.prototype.slice.call(document.querySelectorAll(".glitching")).forEach(function (node) {
+        node.classList.remove("glitching");
+      });
+    }
+
+    window.addEventListener("pageshow", resetCurtain);
+    window.addEventListener("focus", resetCurtain);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) {
+        resetCurtain();
+      }
+    });
+
     document.addEventListener("click", function (event) {
       var link = event.target.closest && event.target.closest("a[href]");
       if (!link || link.target || link.hasAttribute("download") || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
         return;
       }
       var href = link.getAttribute("href");
-      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("http")) {
+      if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("http") || href.indexOf(".pdf") !== -1) {
         return;
       }
       event.preventDefault();
@@ -1021,6 +1070,7 @@
   setupScrollUi();
   setupNavigation();
   setupTocState();
+  setupLinkTargets();
   setupCommandPalette();
   setupCopyEmail();
   setupMouseGlowAndIdle();
