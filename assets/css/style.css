@@ -1833,7 +1833,7 @@ h3 {
   }
 
   50% {
-    transform: translateX(0.32rem);
+    transform: translateY(0.22rem);
   }
 }
 
