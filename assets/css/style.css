@@ -65,7 +65,7 @@ body::after {
   z-index: 0;
   opacity: 0.52;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.64) 78%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.56) 78%),
     url("data:image/svg+xml,%3Csvg width='1800' height='900' viewBox='0 0 1800 900' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.115' stroke-width='4'%3E%3Cpath d='M-120 620C260 430 560 470 850 650c315 195 650 202 1050-120'/%3E%3Cpath d='M-180 760C225 540 560 590 875 778c330 198 690 190 1105-160'/%3E%3Cpath d='M-220 900C200 660 560 720 910 900c340 175 710 135 1090-210'/%3E%3C/g%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: 50% calc(58% + var(--topo-shift, 0px));
@@ -101,8 +101,8 @@ body::after {
 .viewport-vignette {
   z-index: 3;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.3)),
-    radial-gradient(circle at center, transparent 56%, rgba(0, 0, 0, 0.54) 100%);
+    linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.24)),
+    radial-gradient(circle at center, transparent 56%, rgba(0, 0, 0, 0.48) 100%);
 }
 
 .blueprint-field {
