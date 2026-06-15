@@ -289,9 +289,9 @@ main,
   padding: clamp(1rem, 4vw, 3rem);
   border: 0;
   border-radius: 0;
-  background: rgba(0, 0, 0, 0.985);
-  backdrop-filter: blur(44px);
-  -webkit-backdrop-filter: blur(44px);
+  background: rgba(0, 0, 0, 0.965);
+  backdrop-filter: blur(52px);
+  -webkit-backdrop-filter: blur(52px);
   opacity: 0;
   pointer-events: none;
   transform: scale(0.99);
@@ -310,6 +310,7 @@ main,
 }
 
 .menu-panel-grid {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-content: center;
@@ -317,21 +318,45 @@ main,
   min-height: min(760px, calc(100dvh - 2rem));
 }
 
+.menu-panel-grid::before,
+.menu-panel-grid::after {
+  content: "";
+  justify-self: center;
+  width: min(7.5rem, 22vw);
+  height: 1px;
+  background: var(--red);
+  opacity: 0.86;
+}
+
+.menu-panel-grid::before {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.menu-panel-grid::after {
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
 .site-nav nav .nav-menu-panel a,
 .site-nav nav .menu-expertise summary {
   display: block;
   width: 100%;
   padding: clamp(0.42rem, 0.9vw, 0.72rem) 0;
+  border: 0;
   border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--white);
   font-family: var(--font);
-  font-size: clamp(1.75rem, 5vw, 4.85rem);
-  font-weight: 700;
-  letter-spacing: -0.07em;
-  line-height: 0.9;
+  font-size: clamp(1.55rem, 4.6vw, 4.25rem);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+  line-height: 0.94;
   text-align: center;
   text-transform: none;
-  opacity: 0.88;
+  opacity: 0.74;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: color 120ms ease, opacity 120ms ease, letter-spacing 120ms ease, transform 120ms ease;
 }
 
 .menu-expertise {
@@ -351,7 +376,7 @@ main,
   content: "+";
   display: inline-block;
   margin-left: 0.5rem;
-  color: var(--red-bright);
+  color: var(--red);
   font-family: var(--mono);
   font-size: 0.36em;
   letter-spacing: 0;
@@ -364,20 +389,24 @@ main,
 
 .menu-expertise-links {
   display: grid;
-  gap: 0.24rem;
-  margin: 0.4rem auto 0.7rem;
-  width: min(640px, 100%);
+  gap: 0.35rem;
+  margin: 0.65rem auto 0.85rem;
+  width: min(560px, 100%);
+  padding-block: 0.3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .site-nav nav .menu-expertise-links a {
-  padding: 0.2rem 0;
-  color: var(--muted);
+  padding: 0.16rem 0;
+  color: var(--white);
   font-family: var(--mono);
-  font-size: clamp(0.8rem, 1.8vw, 1.05rem);
-  font-weight: 800;
+  font-size: clamp(0.72rem, 1.45vw, 0.94rem);
+  font-weight: 700;
   letter-spacing: 0.12em;
   line-height: 1.2;
   text-transform: uppercase;
+  opacity: 0.58;
 }
 
 .site-nav nav .nav-menu-panel a:hover,
@@ -385,7 +414,24 @@ main,
 .site-nav nav .menu-expertise summary:hover,
 .site-nav nav .menu-expertise summary:focus-visible {
   background: transparent;
-  color: var(--red-bright);
+  color: var(--white);
+  opacity: 1;
+  letter-spacing: -0.045em;
+  transform: translateY(-1px);
+}
+
+.site-nav nav .menu-expertise-links a:hover,
+.site-nav nav .menu-expertise-links a:focus-visible {
+  color: var(--white);
+  letter-spacing: 0.16em;
+  opacity: 1;
+  transform: none;
+}
+
+.site-nav nav .nav-menu-panel a[aria-current="page"] {
+  background: transparent;
+  color: var(--white);
+  opacity: 1;
 }
 
 .side-toc {
@@ -398,15 +444,15 @@ main,
   transform: translateY(-50%);
   border-radius: 999px;
   padding: 0.55rem 0.35rem;
-  background: rgba(0, 0, 0, 0.18);
-  opacity: 0.48;
+  background: transparent;
+  opacity: 0.3;
   pointer-events: auto;
   transition: opacity 140ms ease, transform 140ms ease;
 }
 
 .side-toc:hover,
 .side-toc:focus-within {
-  opacity: 1;
+  opacity: 0.7;
 }
 
 .side-toc a {
@@ -427,14 +473,14 @@ main,
   text-indent: 2rem;
   text-transform: uppercase;
   transform-origin: right center;
-  opacity: 0.46;
+  opacity: 0.38;
   transition: color 140ms ease, opacity 140ms ease, transform 140ms ease;
 }
 
 .side-toc a::after {
   content: "";
-  width: 0.42rem;
-  height: 0.42rem;
+  width: 0.36rem;
+  height: 0.36rem;
   border-radius: 50%;
   background: currentColor;
   opacity: 0.8;
@@ -444,15 +490,15 @@ main,
 .side-toc a:hover,
 .side-toc a:focus-visible,
 .side-toc a.is-active {
-  color: var(--red-bright);
+  color: var(--red);
   opacity: 1;
 }
 
 .side-toc a:hover::after,
 .side-toc a:focus-visible::after,
 .side-toc a.is-active::after {
-  background: var(--red-bright);
-  transform: scale(1.55);
+  background: var(--red);
+  transform: scale(1.35);
 }
 
 .menu-open .side-toc {
@@ -592,7 +638,7 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
+  display: none;
   align-items: center;
   height: 12px;
   padding-inline: 0.45rem;
@@ -1137,7 +1183,7 @@ h3 {
   position: relative;
   display: grid;
   align-content: end;
-  min-height: 10rem;
+  min-height: 8.9rem;
   overflow: hidden;
   color: var(--white);
   border-radius: var(--radius);
@@ -1160,10 +1206,10 @@ h3 {
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 2rem;
+  width: 1.75rem;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--white);
   font-family: var(--mono);
   font-size: 0.9rem;
@@ -1174,7 +1220,7 @@ h3 {
 
 .path-card:hover::before,
 .path-card:focus-visible::before {
-  background: var(--red);
+  background: rgba(255, 255, 255, 0.16);
   transform: translate(2px, -2px);
 }
 
@@ -1188,12 +1234,12 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.78) brightness(0.62) contrast(1.06);
+  filter: grayscale(0.86) brightness(0.58) contrast(1.08);
   transition: filter 160ms ease, transform 220ms ease;
 }
 
 .path-card:hover img {
-  filter: grayscale(0.55) brightness(0.72) contrast(1.07);
+  filter: grayscale(0.7) brightness(0.68) contrast(1.08);
   transform: scale(1.02);
 }
 
@@ -1202,9 +1248,7 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background:
-    linear-gradient(90deg, rgba(174, 16, 28, 0.64) 0 2px, transparent 2px),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.72) 84%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.78) 86%);
 }
 
 .path-card span,
@@ -1218,7 +1262,7 @@ h3 {
 .project-index {
   color: var(--red);
   font-family: var(--mono);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.1rem, 2.2vw, 1.85rem);
   line-height: 1;
 }
 
@@ -1229,7 +1273,7 @@ h3 {
 }
 
 .path-card strong {
-  margin: 0.8rem 0 0.45rem;
+  margin: 0.55rem 0 0.3rem;
   font-size: 1rem;
 }
 

@@ -535,7 +535,6 @@
     var dimmer = document.createElement("div");
     var noise = document.createElement("div");
     var snapDot = document.createElement("div");
-    var idleTimer;
     var lastMouse = { x: 0, y: 0, time: performance.now() };
     glow.className = "mouse-glow";
     dimmer.className = "focus-dimmer";
@@ -548,10 +547,6 @@
 
     function wake() {
       document.body.classList.remove("is-idle");
-      window.clearTimeout(idleTimer);
-      idleTimer = window.setTimeout(function () {
-        document.body.classList.add("is-idle");
-      }, 10000);
     }
 
     document.addEventListener("pointermove", function (event) {
@@ -958,7 +953,6 @@
   setupDynamicTitle();
   setupMatrixMode();
   setupSecretModes();
-  setupScreensaver();
   setupSonarPing();
   setupProximityType();
   setupReveal();
