@@ -1090,12 +1090,7 @@ h3 {
   color: var(--white);
   border-radius: var(--radius);
   isolation: isolate;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 34%),
-    rgba(255, 255, 255, 0.035);
-  outline: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(14px) saturate(122%);
-  -webkit-backdrop-filter: blur(14px) saturate(122%);
+  background: #050505;
 }
 
 .path-card::before,
@@ -1141,12 +1136,12 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(0.72) brightness(0.58) contrast(1.06);
+  filter: grayscale(0.78) brightness(0.62) contrast(1.06);
   transition: filter 160ms ease, transform 220ms ease;
 }
 
 .path-card:hover img {
-  filter: grayscale(0.42) brightness(0.68) contrast(1.07);
+  filter: grayscale(0.55) brightness(0.72) contrast(1.07);
   transform: scale(1.02);
 }
 
@@ -1157,10 +1152,7 @@ h3 {
   z-index: 0;
   background:
     linear-gradient(90deg, rgba(174, 16, 28, 0.64) 0 2px, transparent 2px),
-    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.16), transparent 30%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.7) 82%);
-  backdrop-filter: blur(1.5px);
-  -webkit-backdrop-filter: blur(1.5px);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.72) 84%);
 }
 
 .path-card span,
@@ -1441,10 +1433,7 @@ h3 {
   overflow: hidden;
   border-radius: var(--radius);
   isolation: isolate;
-  background: rgba(255, 255, 255, 0.035);
-  outline: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px) saturate(112%);
-  -webkit-backdrop-filter: blur(14px) saturate(112%);
+  background: #050505;
 }
 
 .gallery-grid img {
@@ -1452,13 +1441,13 @@ h3 {
   height: 100%;
   min-height: 13rem;
   object-fit: cover;
-  filter: grayscale(0.58) brightness(0.72) contrast(1.08);
+  filter: grayscale(0.72) brightness(0.72) contrast(1.08);
   clip-path: inset(var(--image-mask, 0%) 0 0 0 round var(--radius));
   transition: filter 160ms ease, transform 220ms ease;
 }
 
 .gallery-grid figure:hover img {
-  filter: grayscale(0.28) brightness(0.82) contrast(1.08);
+  filter: grayscale(0.55) brightness(0.82) contrast(1.08);
   transform: scale(1.025);
 }
 
@@ -1467,18 +1456,12 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background:
-    linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.48)),
-    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.12), transparent 22%);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
+  background: linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.66));
   pointer-events: none;
 }
 
 .gallery-grid figure:hover::after {
-  background:
-    linear-gradient(180deg, transparent 38%, rgba(0, 0, 0, 0.46)),
-    radial-gradient(circle at 80% 10%, rgba(174, 16, 28, 0.18), transparent 24%);
+  background: linear-gradient(180deg, transparent 46%, rgba(0, 0, 0, 0.58));
 }
 
 .gallery-grid figcaption {
@@ -1488,10 +1471,9 @@ h3 {
   z-index: 1;
   border-radius: 999px;
   padding: 0.42rem 0.62rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.72);
   color: var(--white);
-  backdrop-filter: blur(18px) saturate(130%);
-  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  border-left: 2px solid var(--red);
   font-family: var(--mono);
   font-size: 0.62rem;
   font-weight: 800;
